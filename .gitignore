@@ -1,0 +1,11 @@
+# Node.js
+/client/node_modules/
+/backend/.env
+/backend/node_modules/
+
+# Log files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
