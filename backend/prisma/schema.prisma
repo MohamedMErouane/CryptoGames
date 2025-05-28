@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  
+}
+model User {
+  id             String  @id @default(uuid())
+  email          String  @unique
+  password       String?  // Nullable for Google sign-in users
+  profileImage   String?  // Can be null initially
+  coins          Int      @default(0) // Default coins = 0
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
