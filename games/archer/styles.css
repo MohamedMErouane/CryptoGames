@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: url('assets/Flux_Dev_A_serene_and_rustic_private_archery_ground_serves_as__1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Top Bar Styles */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 30px;
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+}
+
+.top-bar > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.label {
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+#score, #countdown, #highscore {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* Crosshair styles */
+.crosshair {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    transition: transform 0.1s ease-out;
+    z-index: 10;
+    left: 6cm;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.crosshair::before,
+.crosshair::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    width: 2px;
+    height: 10px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.crosshair::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.crosshair::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Optional debug outline */
+/* Removed debug outline */
+/*body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    outline: 2px solid red;
+    pointer-events: none;
+    z-index: 999;
+}*/
+
+/* Hit effect styles */
+.hit-effect {
+    position: fixed; /* Changed from absolute to fixed to ensure visibility */
+    pointer-events: none;
+    z-index: 9000; /* High z-index to ensure visibility */
+}
+
+.hit-flash {
+    animation: pulse 0.3s ease-out;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.8));
+}
+
+.hit-ring {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 0, 0.5);
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.6));
+}
+
+.score-indicator {
+    animation: float-up 1s ease-out;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 0, 0.6);
+    font-size: 32px !important;
+}
+
+.hit-particle {
+    animation: fade-out 0.5s ease-out;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.9; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+}
+
+@keyframes float-up {
+    0% { transform: translate(-50%, -50%); opacity: 1; }
+    100% { transform: translate(-50%, -150%); opacity: 0; }
+}
+
+@keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px; /* Space for fixed top bar */
+    box-sizing: border-box;
+}
+
+#bow-canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: auto; /* Changed to auto to capture mouse events */
+    z-index: 60;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.9));
+}
+
+#bow-container {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    z-index: 100;
+    pointer-events: auto;
+    transition: transform 0.2s ease-out;
+}
+
+.crosshair {
+    z-index: 110;
+}
+
+.target {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    left: 40%;
+    top: 40%;
+}
+
+.ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid #222;
+}
+
+/* White (outermost) */
+.ring-1 {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    top: 0; left: 0;
+}
+.ring-2 {
+    width: 90%;
+    height: 90%;
+    top: 5%; left: 5%;
+    background: #fff;
+}
+/* Black */
+.ring-3 {
+    width: 80%;
+    height: 80%;
+    top: 10%; left: 10%;
+    background: #111;
+}
+.ring-4 {
+    width: 70%;
+    height: 70%;
+    top: 15%; left: 15%;
+    background: #111;
+}
+/* Blue */
+.ring-5 {
+    width: 60%;
+    height: 60%;
+    top: 20%; left: 20%;
+    background: #1e90ff;
+}
+.ring-6 {
+    width: 50%;
+    height: 50%;
+    top: 25%; left: 25%;
+    background: #1e90ff;
+}
+/* Red */
+.ring-7 {
+    width: 40%;
+    height: 40%;
+    top: 30%; left: 30%;
+    background: #ff3b30;
+}
+.ring-8 {
+    width: 30%;
+    height: 30%;
+    top: 35%; left: 35%;
+    background: #ff3b30;
+}
+/* Yellow */
+.ring-9 {
+    width: 20%;
+    height: 20%;
+    top: 40%; left: 40%;
+    background: #ffe066;
+}
+.ring-10 {
+    width: 12%;
+    height: 12%;
+    top: 44%; left: 44%;
+    background: #ffe066;
+}
+
+.bullseye {
+    position: absolute;
+    width: 7%;
+    height: 7%;
+    top: 46.5%;
+    left: 46.5%;
+    background: #ffe066;
+    border-radius: 50%;
+    border: 2px solid #222;
+    z-index: 2;
+}
+
+.center-dot {
+    position: absolute;
+    width: 2.5%;
+    height: 2.5%;
+    top: 48.75%;
+    left: 48.75%;
+    background: #ffd700;
+    border-radius: 50%;
+    border: 1.5px solid #222;
+    z-index: 3;
+}
+
+#bow-container {
+    position: absolute;
+    width: 600px; /* Fixed width */
+    height: 600px; /* Fixed height to match renderer size */
+    z-index: 100;
+    pointer-events: auto;
+    transition: transform 0.2s ease-out; /* Smooth transition */
+}
+
+/* Default position - bow at the right side */
+#bow-container {
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Aiming position - bow stays exactly where it was */
+#bow-container.aiming {
+justify-content: center;    /* No position change at all - we'll handle this in JavaScript */
+    /* This ensures the container itself doesn't move */
+}

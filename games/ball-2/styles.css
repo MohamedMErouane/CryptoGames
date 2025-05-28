@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css?family=Kameron:700');
+
+:root {
+  --primary: #414042;
+  --secondary: #adafb3;
+  --tertiary: #feebcb;
+  --shadow: 0 0 1px #633a26;
+}
+
+html, body {
+ box-sizing: border-box;
+ height: 100%;
+ margin: 0;
+ width: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+svg {
+ fill: rgb(255,252,255);
+ height: 30%;
+ left:25%;
+ overflow: visible;
+ position: absolute;
+ stroke: black;
+ top: 12%;
+ width: 50%;
+ z-index: 0;
+ will-change: transform;
+  
+ -webkit-tap-highlight-color: rgba(0,0,0,0);
+ -webkit-tap-highlight-color: transparent;
+}
+
+.stage {
+  background: url('../assets/bg_basketball.png') no-repeat center center;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  will-change: transform;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+#bHoop {
+ stroke-width: 5;
+ z-index: 1;
+ position: absolute;
+ transform: translateZ(-500px);
+}
+
+#basket {
+ z-index: 2;
+ position: absolute;
+ transform: translateZ(-500px);
+}
+
+#basket #net {
+ fill: none;
+ stroke: #CCC;
+ stroke-miterlimit: 10;
+ stroke-width: 1;
+}
+
+#basket #ring {
+ fill: #df4931;
+ stroke: none;
+ z-index: 2;
+}
+
+#ball {
+ cursor: pointer;
+ fill: #df4931;
+ stroke: none;
+ z-index: 3;
+ position: absolute;
+ transform-style: preserve-3d;
+}
+
+#ball .ballPath {
+ clip-path: url(#clip-path);
+}
+
+#ball .ballStripe {
+ fill: none;
+ stroke: #fff;
+ stroke-miterlimit: 10;
+}
+
+ul {
+ list-style-type: none;
+ padding: 0;
+ top: 0;
+}
+
+li {
+ display: inline-block;
+ width: 33%;
+}
+
+.copy {
+ background: var(--primary);
+ box-shadow: var(--shadow);
+ color: var(--secondary);
+ font-family: 'Kameron', serif;
+ font-size: 1rem;
+ left: 0;
+ margin: 0;
+ padding: 6px 0;
+ position: fixed;
+ text-align: center;
+ text-transform: uppercase;
+ width: 100%;
+}
+
+.instructions {
+ bottom: 0;
+ font-size: 1rem;
+}
+
+#bHoop .shadow {
+ fill: rgba(0,0,0,0.7);
+ stroke: none;
+ opacity: 0;
+}
+
+#goalText {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Kameron', serif;
+  font-size: 0px;
+  color: #df4931;
+  text-transform: uppercase;
+  font-weight: bold;
+  opacity: 0;
+  z-index: 9999;
+  pointer-events: none;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  will-change: transform, opacity, font-size;
+}
+
+.start-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 1;
+}
+
+.start-content {
+  text-align: center;
+  
+}
+
+.start-content h1 {
+  font-family: 'Kameron', serif;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #df4931;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.start-button {
+  background-color: #df4931;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Kameron', serif;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.start-button:hover {
+  transform: scale(1.05);
+  background-color: #c43d28;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archer Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="score-container">
+            <span class="label">Score:</span>
+            <span id="score">0</span>
+        </div>
+        <div class="countdown-container">
+            <span class="label">Time:</span>
+            <span id="countdown">60</span>s
+        </div>
+        <div class="highscore-container">
+            <span class="label">High Score:</span>
+            <span id="highscore">0</span>
+        </div>
+    </div>
+    <div class="game-container">
+        <div class="crosshair"></div>
+        <div class="target">
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-3"></div>
+            <div class="ring ring-4"></div>
+            <div class="ring ring-5"></div>
+            <div class="ring ring-6"></div>
+            <div class="ring ring-7"></div>
+            <div class="ring ring-8"></div>
+            <div class="ring ring-9"></div>
+            <div class="ring ring-10"></div>
+            <div class="bullseye"></div>
+            <div class="center-dot"></div>
+        </div>
+        <canvas id="bow-canvas" style="z-index: 50;"></canvas>
+        <div id="bow-container"></div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
